@@ -70,10 +70,6 @@ NACO = casa.Cube("NACO/PCA-annular_npc1-50_delta_rot1.fits",pixelscale=NACO_pixe
 NACO.bmaj = fwhm * NACO_pixelscale
 NACO.bmin = fwhm * NACO_pixelscale
 
-NACO_empty = casa.Cube('NACO/pca_ann_empty_rerun.fits',pixelscale=NACO_pixelscale, unit="adu")
-NACO_empty.bmaj = fwhm * NACO_pixelscale
-NACO_empty.bmin = fwhm * NACO_pixelscale
-
 r_mask = 2*fwhm * NACO_pixelscale
 
 
@@ -491,6 +487,10 @@ if False:
 #win=6
 #vmin = np.percentile(NACO.image[19,:,:],0.1)
 #vmax = np.percentile(NACO.image[19,:,:],99.5)
+#
+#NACO_empty = casa.Cube('NACO/pca_ann_empty_rerun.fits',pixelscale=NACO_pixelscale, unit="adu")
+#NACO_empty.bmaj = fwhm * NACO_pixelscale
+#NACO_empty.bmin = fwhm * NACO_pixelscale
 #
 #
 #fig6, axes6 = plt.subplots(nrows=1, ncols=2, figsize=(1*(fig_xfactor)*2,fig_yfactor*1), num=win, constrained_layout=True)
