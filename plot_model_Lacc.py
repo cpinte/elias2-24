@@ -24,27 +24,11 @@ Vsyst = 3.0
 # NACO :
 fwhm = fits.getdata('NACO/fwhm.fits')[0]
 NACO_pixelscale = 0.027208 # arcsec/pixel
-#NACO = casa.Cube("NACO/final_PCA-ADI_ann_npc1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20.fits",pixelscale=NACO_pixelscale, unit="adu")
 NACO = casa.Cube("NACO/PCA-annular_npc1-50_delta_rot1.fits",pixelscale=NACO_pixelscale, unit="adu")
 NACO.bmaj = fwhm * NACO_pixelscale
 NACO.bmin = fwhm * NACO_pixelscale
 
 r_mask = 2*fwhm * NACO_pixelscale
-
-#todo :
-#try to change PA a tiny bit
-
-# 1Mj --> 3Mj  visible at 1e-7 : cont way too bright
-# 3Mj --> 5.5Mj visible at 1e-8
-# 5Mj --> 8Mj  visible at 1e-9
-
-
-# fluffy : gap in CO visible if fluffy closer to 1, not sure why, CPD less visible with higher fluffy parameter too
-# 1 Mj  --> 0.3
-# 3Mj --> 0.1
-# 5Mj --> 0.03
-
-
 
 #------------------
 Mplanet = ["10","5","5","3","3"]
@@ -56,12 +40,8 @@ Mplanet = ["5","5","3","1"]
 Lacc = [1e-9,0.0,1e-8,1.e-7]
 Lacc_name = ["$\dot{\mathrm{M}} = 3\,10^{-8}$ M$_\odot$","","$\dot{\mathrm{M}} = 10^{-8}$ M$_\odot$","",""]
 
-#Mplanet = ["1","3","5","7"]
 Mplanet = ["1","1","5","5"]
 Lacc = [1e-7,0.0,3e-9,3e-9]
-#Lacc = [1e-7,0.0,0.0,0.0]
-#Lacc_name = ["$\dot{\mathrm{M}} = 3\,10^{-8}$ M$_\odot$","","$\dot{\mathrm{M}} = 10^{-8}$ M$_\odot$","",""]
-Lacc_name = ["$10^{-7}$M$_\mathrm{\odot}$/yr","0","0","0","0"]
 Lacc_name = ["$10^{-4}$M$_\mathrm{Jup}$/yr","0","0","0","0"]
 
 fluffy = [1,1,1,0.01]
@@ -92,10 +72,7 @@ star_shift_dy = -0.383
 
 
 cmap_cont = "inferno"
-NACO_cmap = "viridis"
-NACO_cmap = "gist_earth" #
 NACO_cmap = cmr.dusk
-
 
 
 # We plot the observations on the first row
@@ -130,27 +107,7 @@ axes[0,1].text(0.92,0.85,"$^{12}$CO J=2-1",color="white",fontsize=10,va="center"
 ax = axes[0,nv+1]
 NACO.plot(ax=ax,iv=14,interpolation="bicubic",stellar_mask=r_mask,fmax=15,cmap=NACO_cmap,limits=limits,fmin=-10, no_ylabel=True, no_xlabel=True, colorbar=False) # 20th PCA component
 
-#inner_wake = (-0.35, -0.18)
-#ax.annotate('inner planet\nwake?', xy=inner_wake, xytext=(-0.51, -0.8),
-#            arrowprops=dict(arrowstyle="->", color="white",
-#                            shrinkA=20,
-#                            #shrinkB=5,
-#                            patchA=None,
-#                            #patchB=None,
-#                            connectionstyle="arc3,rad=0.3"),
-#            color="white", fontsize=8, va='center', ha='center', rotation=0.0)
-#
-#ax.annotate('outer planet\n wake?', xy=(-0.23, 0.47), xytext=(0.55, 0.75),
-#            arrowprops=dict(arrowstyle="->", color="white",
-#                            shrinkA=35,
-#                            #shrinkB=5,
-#                            patchA=None,
-#                            #patchB=None,
-#                            connectionstyle="arc3,rad=-0.3"),
-#            color="white", fontsize=8, va='top', ha='center', rotation=0.0)
-#
 ax.plot(0,0,"*",color="white",ms=4)
-#ax.plot(x_planet, y_planet ,"o",color="black",ms=2)
 
 ax.annotate('planet\ncandidate', xy=(x_planet-0.01, y_planet+0.03), xytext=(-0.68, 0.5),
             arrowprops=dict(arrowstyle="->", color="white",
